@@ -1,8 +1,3 @@
-#rm(list = ls())
-#plot.new()
-
-par(mfrow=c(2,2))
-
 # NumberOfFriends represents number of friends in 
 # a user's social network
 NumberOfFriends=100
