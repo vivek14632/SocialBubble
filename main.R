@@ -1,11 +1,33 @@
-probabilityOfUserPosting=0.9
+#rm(list = ls())
+#plot.new()
 
-performUserAction<-function()
+par(mfrow=c(2,2))
+
+# NumberOfFriends represents number of friends in 
+# a user's social network
+NumberOfFriends=100
+
+# currentTimeClick is the counter tick for the simulation
+currentTimeClick=0
+SIMULATION_INTERVAL=100
+
+
+# Not all users in social media post
+# equally. Few user post most often compare to a majority 
+# of passive users
+
+# generate the probabilities of user posting from exponential
+# distribution
+expNumbers=rexp(NumberOfFriends,4)
+probabilityOfUserPosting=pexp(expNumbers)
+hist(probabilityOfUserPosting)
+
+performUserAction<-function(friend)
 {
   # generate a value from Uniform distribution ~U[0,1]
   
   # runif() generate numbers from a bernauli distribution
-  bernauliRandom=rbern(1,probabilityOfUserPosting)
+  bernauliRandom=rbern(1,probabilityOfUserPosting[friend])
   print(bernauliRandom)
   if(bernauliRandom==1)
   {
@@ -21,13 +43,6 @@ performUserAction<-function()
 
 userFeed=vector()
 
-# NumberOfFriends represents number of friends in 
-# a user's social network
-NumberOfFriends=100
-
-# currentTimeClick is the counter tick for the simulation
-currentTimeClick=0
-SIMULATION_INTERVAL=100
 
 
 
@@ -45,7 +60,7 @@ while(TRUE)
   
   for (friend in 1:NumberOfFriends)
   {
-    performUserAction()
+    performUserAction(friend)
   }
   
   
